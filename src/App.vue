@@ -1,12 +1,12 @@
 <script setup>
-import AddContact from './components/AddContact.vue';
+import AddContact from './components/AddContactForm.vue';
 
 </script>
 
 <template>
   <header>
     
-    
+
   </header>
 
   <main>
