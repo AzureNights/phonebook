@@ -1,9 +1,9 @@
 <template>
 
-    <div class="flex justify-center gap-8 p-6">
-
+    <div class="flex gap-8 p-6">
 
         
+
         <form v-on:submit.prevent="addItem" class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-4">
 
             <h1 class="text-xl font-semibold mb-4 text-center">My Little Phone Book</h1>
@@ -85,12 +85,10 @@ export default {
 
     methods: {
         addItem() {
-
-
-            console.log('Name:', this.contactName)
-            console.log('Tel:', this.contactNumber)
-            console.log('Email:', this.contactEmail)
-            console.log('Address:', this.contactAdd)
+            // console.log('Name:', this.contactName)
+            // console.log('Tel:', this.contactNumber)
+            // console.log('Email:', this.contactEmail)
+            // console.log('Address:', this.contactAdd)
 
             this.contactName = ''
             this.contactNumber = ''
