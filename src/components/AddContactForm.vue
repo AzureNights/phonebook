@@ -56,11 +56,11 @@
     </div>
 
     <!-- <h3>Contacts</h3>
-    <ol>
+    <ul>
         <li v-for="item in addBook">{{ ccontact }}</li>
 
 
-    </ol> -->
+    </ul> -->
 </template>
 
 <script>
@@ -77,6 +77,13 @@ export default {
         }
     },
 
+    //continue after fixing the v for part 
+    // computed: {
+    //     itemsFromLocalStorage() {
+    //         return JSON.parse(localStorage.getItem(''))
+    //     }
+    // }
+
     methods: {
         addItem() {
             // console.log('Name:', this.contactName)
@@ -84,13 +91,19 @@ export default {
             // console.log('Email:', this.contactEmail)
             // console.log('Address:', this.contactAdd)
 
-            const newContact =  
+            const newContact =  {
+                name: this.contactName,
+                number: this.contactNumber,
+                email: this.contactEmail,
+                address: this.contactAdd                
+            };
 
             this.contactName = ''
             this.contactNumber = ''
             this.contactEmail = ''
             this.contactAdd = ''
 
+            this.$emit('add-contact', newContact)
         }
     },
 
