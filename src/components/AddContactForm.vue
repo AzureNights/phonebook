@@ -50,17 +50,17 @@
 
             <br />
             <br />
-            <button class="w-full inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased" type="submit">Add Contact</button>
+            <button @click="addContactToBook" class="w-full inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased">Add Contact</button>
 
         </form>
     </div>
 
-    <!-- <h3>Contacts</h3>
+    <h3>Contacts</h3>
     <ul>
-        <li v-for="item in addBook">{{ ccontact }}</li>
-
-
-    </ul> -->
+        <li v-for="(item, index) in addBook" :key="index">
+            {{ item.name }} - {{ item.number }} - {{ item.email }} - {{ item.address }}
+        </li>
+    </ul>
 </template>
 
 <script>
@@ -84,13 +84,15 @@ export default {
     //     }
     // }
 
-    methods: {
-        addItem() {
-            // console.log('Name:', this.contactName)
-            // console.log('Tel:', this.contactNumber)
-            // console.log('Email:', this.contactEmail)
-            // console.log('Address:', this.contactAdd)
+    mounted() {
+        const savedContacts = localStorage.getItem('addBook');
+        if (savedContacts) {
+            this.addBook = JSON.parse(savedContacts)
+        }
+    },
 
+    methods: {
+        addContactToBook() {
             const newContact =  {
                 name: this.contactName,
                 number: this.contactNumber,
@@ -98,14 +100,15 @@ export default {
                 address: this.contactAdd                
             };
 
-            this.contactName = ''
-            this.contactNumber = ''
-            this.contactEmail = ''
-            this.contactAdd = ''
+            this.addBook.push(newContact);
 
-            this.$emit('add-contact', newContact)
+            localStorage.setItem('addBook', JSON.stringify(this.addBook));
+
+            this.contactName = '';
+            this.contactNumber = '';
+            this.contactEmail = '';
+            this.contactAdd = '';
         }
-    },
-
-}
+    }
+};
 </script>
