@@ -53,14 +53,11 @@
             <button @click="addContactToBook" class="w-full inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased">Add Contact</button>
 
         </form>
-    </div>
 
-    <h3>Contacts</h3>
-    <ul>
-        <li v-for="(item, index) in addBook" :key="index">
-            {{ item.name }} - {{ item.number }} - {{ item.email }} - {{ item.address }}
-        </li>
-    </ul>
+        <!-- To pass the form as a prop to my table -->
+        <AddressBookTable :contacts="addBook" />
+
+    </div>
 </template>
 
 <script>
@@ -71,25 +68,17 @@ export default {
             contactNumber: '',
             contactEmail: '',
             contactAdd: '',
-            addBook: [
-                { name: 'Amy', number: 999, email: 'gg@gg.com', address: '1 GG Street' }
-            ]
         }
     },
 
-    //continue after fixing the v for part 
-    // computed: {
-    //     itemsFromLocalStorage() {
-    //         return JSON.parse(localStorage.getItem(''))
+
+    // moved to App.vue - parent file 
+    // mounted() {
+    //     const savedContacts = localStorage.getItem('addBook');
+    //     if (savedContacts) {
+    //         this.addBook = JSON.parse(savedContacts)
     //     }
-    // }
-
-    mounted() {
-        const savedContacts = localStorage.getItem('addBook');
-        if (savedContacts) {
-            this.addBook = JSON.parse(savedContacts)
-        }
-    },
+    // },
 
     methods: {
         addContactToBook() {
